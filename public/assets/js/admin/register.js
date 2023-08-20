@@ -47,7 +47,7 @@ $(document).ready(function() {
             dataType: 'json',
             beforeSend: function(){
                 registerBtn.css('pointerEvents', 'none')
-                .attr('disabled', 'disabled').html('<i class="fa-solid fa-spinner fa-spin-pulse"></i>');
+                .html('<i class="fa-solid fa-spinner fa-spin-pulse"></i>');
             },
             success: function( response ) {
               if(response.status == 1) {
@@ -60,8 +60,11 @@ $(document).ready(function() {
                     window.location.href = '/admin/login';
                  }, 4000);
               } else {
-                registerBtn.css('pointerEvents', 'auto')
-                .after('<span class="text-rose-600 text-sm font-bold error">This was not expected.</span>');
+                if(response.is_exist == 'yes'){
+                    registerBtn.css('pointerEvents', 'auto')
+                .html('Create an account');
+                $('#email').after('<span class="text-rose-600 text-sm font-bold error">Email already exists.</span>');
+                }
               }
             }
         });

@@ -25,6 +25,7 @@ $(document).ready(function() {
             },
             success: function( response ) {
               if(response.status == 1) {
+                 loginBtn.next('.error').remove();
                  loginBtn.css('pointerEvents', 'none')
                  .html('Sign in')
                  .after('<span class="text-green-600 text-sm font-bold">You are now logged in.</span>');
@@ -33,6 +34,7 @@ $(document).ready(function() {
                     window.location.href = '/admin/dashboard';
                  }, 2000);
               } else {
+                loginBtn.next('.error').remove();
                     loginBtn.css('pointerEvents', 'auto')
                 .html('Sign in');
                 loginBtn.after('<span class="text-rose-600 text-sm font-bold error">Email and password do not match.</span>');

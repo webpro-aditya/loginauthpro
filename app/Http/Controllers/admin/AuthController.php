@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\User;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
@@ -23,8 +24,16 @@ class AuthController extends Controller
      */
     public function login(Request $request)
     {
-        $email = $request->post('email');
-        $password = $request->post('password');
+        $userdata = [];
+        $userdata['email'] = $request->post('email');
+        $userdata['password'] = $request->post('password');
+        $response = [];
+        $response['status'] = 0;
+
+        if (Auth::attempt($userdata)) {
+            $response['status'] = 1;
+        }
+        return response()->json($response);
     }
 
     public function register()

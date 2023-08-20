@@ -15,6 +15,7 @@
     @yield('form')
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script src="{{ asset('assets/js/admin/login.js') }}"></script>
     <script src="{{ asset('assets/js/admin/register.js') }}"></script>
 </body>
 

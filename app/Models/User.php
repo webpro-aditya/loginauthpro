@@ -43,6 +43,11 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
+    /**
+     * Check if email already registered
+     *
+     * @var string
+     */
     public function is_email_exists($email = '')
     {
         $is_exist = User::where('email', $email)->exists();

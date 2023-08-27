@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\Admin\AuthController;
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\ProductController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,7 +20,12 @@ use App\Http\Controllers\Admin\AdminController;
 Route::prefix('admin')->group(function () {
     Route::get('/login', [AuthController::class, 'index'])->name('login');
     Route::post('/login', [AuthController::class, 'login'])->name('checklogin');
+    Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
     Route::get('/register', [AuthController::class, 'register'])->name('register');
     Route::post('/register', [AuthController::class, 'registeruser'])->name('registeruser');
-    Route::get('/dashboard', [AdminController::class, 'index'])->name('dashboard');
+
+    Route::middleware('auth')->group(function() {
+        Route::get('/dashboard', [AdminController::class, 'index'])->name('dashboard');
+        Route::get('/products', [ProductController::class, 'index'])->name('admin.products');
+    });
 });

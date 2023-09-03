@@ -23,6 +23,8 @@ Route::prefix('admin')->group(function () {
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
     Route::get('/register', [AuthController::class, 'register'])->name('register');
     Route::post('/register', [AuthController::class, 'registeruser'])->name('registeruser');
+    Route::get('/google-login', [AuthController::class, 'google_login'])->name('google-login');
+    Route::get('/googleauth', [AuthController::class, 'googleAuthCallback'])->name('googleauth');
 
     Route::middleware('auth')->group(function() {
         Route::get('/dashboard', [AdminController::class, 'index'])->name('dashboard');
